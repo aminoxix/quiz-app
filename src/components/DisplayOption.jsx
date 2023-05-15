@@ -17,6 +17,21 @@ const DisplayOption = ({ setQuestion, selectedQuestionIndex, option }) => {
     };
   });
 
+  const deleteOption = (id) => () => {
+    setQuestion((prev) => {
+      return prev.map((question, index) => {
+        if (index === selectedQuestionIndex) {
+          return {
+            ...question,
+            options: question.options.filter((option) => option.id !== id),
+          };
+        } else {
+          return question;
+        }
+      });
+    });
+  };
+
   const editOption = (id) => (event) => {
     setQuestion((prev) => {
       return prev.map((question, index) => {
@@ -43,18 +58,27 @@ const DisplayOption = ({ setQuestion, selectedQuestionIndex, option }) => {
 
   return (
     <div key={option.id} className="flex gap-2 items-center">
-      <input type="checkbox" onChange={() => {}} />
-      {isClickedToEditOption ? (
-        <input
-          className="rounded w-full text-white bg-[#392BB6] outline-none"
-          value={option.option}
-          onChange={editOption(option.id)}
-        />
-      ) : (
-        <span onClick={() => setIsClickedToEditOption((prev) => !prev)}>
-          {option.option}
-        </span>
-      )}
+      <input type="radio" onChange={() => {}} />
+      <div className="flex flex-1 justify-between">
+        {isClickedToEditOption ? (
+          <input
+            className="rounded w-full text-white bg-[#392BB6] outline-none"
+            value={option.option}
+            onChange={editOption(option.id)}
+          />
+        ) : (
+          <span
+            onClick={() => {
+              setIsClickedToEditOption((prev) => !prev);
+            }}
+          >
+            {option.option}
+          </span>
+        )}
+        <div className="text-red-600" onClick={deleteOption(option.id)}>
+          ✘
+        </div>
+      </div>
     </div>
   );
 };
