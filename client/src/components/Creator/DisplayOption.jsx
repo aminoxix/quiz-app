@@ -56,28 +56,68 @@ const DisplayOption = ({ setQuestion, selectedQuestionIndex, option }) => {
     });
   };
 
+  const handleCorrectOptionClick = (id) => () => {
+    setQuestion((prev) => {
+      return prev.map((question, index) => {
+        if (index === selectedQuestionIndex) {
+          return {
+            ...question,
+            options: question.options.map((option) => {
+              if (option.id === id) {
+                return {
+                  ...option,
+                  isCorrect: true,
+                };
+              } else {
+                return {
+                  ...option,
+                  isCorrect: false,
+                };
+              }
+            }),
+          };
+        } else {
+          return question;
+        }
+      });
+    });
+  };
+
   return (
     <div key={option.id} className="flex gap-2 items-center">
-      <input type="radio" onChange={() => {}} />
+      <input
+        onClick={handleCorrectOptionClick(option.id)}
+        type="radio"
+        checked={option.isCorrect}
+        className="cursor-pointer"
+      />
       <div className="flex flex-1 justify-between">
         {isClickedToEditOption ? (
           <input
-            className="rounded w-full text-white bg-[#392BB6] outline-none"
+            className="rounded w-full bg-[#392BB6] outline-none"
             value={option.option}
             onChange={editOption(option.id)}
           />
         ) : (
-          <span
+          <div
             onClick={() => {
               setIsClickedToEditOption((prev) => !prev);
             }}
+            className={`${
+              option.option === "+ Add Option" ? "text-gray-400" : "text-white"
+            }`}
           >
             {option.option}
-          </span>
+          </div>
         )}
-        <div className="text-red-600" onClick={deleteOption(option.id)}>
-          ✘
-        </div>
+        {option.option !== "+ Add Option" && (
+          <div
+            className="text-red-600 cursor-pointer"
+            onClick={deleteOption(option.id)}
+          >
+            ✘
+          </div>
+        )}
       </div>
     </div>
   );

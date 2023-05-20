@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import DisplayOption from "./DisplayOption";
 
-const DisplayQuestion = ({ question, setQuestion, selectedQuestionIndex }) => {
+const DisplayQuestion = ({
+  question,
+  setQuestion,
+  selectedQuestionIndex,
+  setSelectedQuestionIndex,
+}) => {
   const [isClickedToEditQuestion, setIsClickedToEditQuestion] = useState(false);
 
   const editQuestion = (event) => {
@@ -59,9 +64,21 @@ const DisplayQuestion = ({ question, setQuestion, selectedQuestionIndex }) => {
     });
   };
 
+  const deleteQuestion = (id) => () => {
+    setQuestion((prev) => {
+      const filteredQuestions = prev.filter((ques) => ques.id !== id);
+      const newIndex =
+        selectedQuestionIndex >= filteredQuestions.length
+          ? selectedQuestionIndex - 1
+          : selectedQuestionIndex;
+      setSelectedQuestionIndex(newIndex);
+      return filteredQuestions;
+    });
+  };
+
   return (
     <div className="w-full 2xl:w-1/2 xl:w-1/2">
-      <div className="flex bg-[#392BB6] rounded h-auto 2xl:h-60 xl:h-60 p-3">
+      <div className="flex relative bg-[#392BB6] rounded h-auto 2xl:h-60 xl:h-60 p-3">
         <div className="flex flex-col gap-4">
           <div className="clickable-element" onClick={editQuestion}>
             {isClickedToEditQuestion ? (
@@ -69,13 +86,24 @@ const DisplayQuestion = ({ question, setQuestion, selectedQuestionIndex }) => {
                 type="text"
                 value={question.question}
                 onChange={editQuestion}
-                className="rounded w-full text-white bg-[#392BB6] outline-none"
+                className="rounded w-full md:text-2xl text-white bg-[#392BB6] outline-none"
               />
             ) : (
-              <div onClick={() => setIsClickedToEditQuestion((prev) => !prev)}>
+              <div
+                className="md:text-2xl"
+                onClick={() => setIsClickedToEditQuestion((prev) => !prev)}
+              >
                 {question.question}
               </div>
             )}
+            <div className="absolute top-3 md:top-4 right-2">
+              <button
+                onClick={deleteQuestion(question.id)}
+                className="material-symbols-rounded text-red-600"
+              >
+                delete_sweep
+              </button>
+            </div>
           </div>
           <div>
             {question.options.map((option) => (
@@ -88,7 +116,7 @@ const DisplayQuestion = ({ question, setQuestion, selectedQuestionIndex }) => {
             ))}
             {lastOption.option !== "+ Add Option" && (
               <div className="flex gap-2 items-center">
-                <input type="radio" />
+                <input type="radio" checked={false} />
                 <button
                   className="text-gray-400 cursor-text"
                   onClick={addOption}

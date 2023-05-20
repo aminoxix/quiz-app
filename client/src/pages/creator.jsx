@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import EmojiPicker from "emoji-picker-react";
 import Button from "../components/Button";
-import DisplayQuestion from "../components/DisplayQuestion";
+import DisplayQuestion from "../components/Creator/DisplayQuestion";
 
 const Creator = () => {
   const [selectedEmoji, setSelectedEmoji] = useState("📝");
@@ -186,7 +186,7 @@ const Creator = () => {
         )}
       </nav>
       <div className="flex flex-col flex-1 bg-brand p-3 text-white z-0">
-        <div className="flex flex-1 gap-4 justify-between">
+        <div className="flex flex-1 gap-4 justify-between items-center">
           <div className="flex flex-col">
             {questions.map((question, index) => (
               <div
@@ -212,6 +212,7 @@ const Creator = () => {
               setQuestion={setQuestion}
               key={selectedQuestionIndex}
               selectedQuestionIndex={selectedQuestionIndex}
+              setSelectedQuestionIndex={setSelectedQuestionIndex}
             />
           </div>
         </div>
@@ -226,7 +227,7 @@ const Creator = () => {
             </button>
           </div>
           <button
-            className="flex justify-start text-accent items-start"
+            className="flex justify-start text-accent items-start w-auto"
             onClick={handleScroll}
           >
             <span className="material-symbols-rounded">expand_more</span>
