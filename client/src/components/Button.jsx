@@ -1,14 +1,11 @@
 import React from "react";
 
-const Button = (props) => {
+const Button = ({ handleClick, className, disabled, icon, innerText }) => {
   return (
-    <button
-      onClick={props.handleClick}
-      className={`bg-accent text-white px-4 py-3 font-medium rounded-md w-36 ${props.className}`}
-    >
+    <button onClick={handleClick} className={className} disabled={disabled}>
       <div className="flex gap-2 justify-center">
-        {props.icon}
-        {props.innerText}
+        {icon}
+        {innerText}
       </div>
     </button>
   );

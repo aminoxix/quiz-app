@@ -10,6 +10,10 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.7.13",
+    "@tanstack/react-query": "^4.29.11",
+    "@tanstack/react-query-devtools": "^4.29.11",
+    "axios": "^1.4.0",
+    "dotenv": "^16.0.3",
     "emoji-picker-react": "^4.4.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
