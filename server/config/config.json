@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": null,
+    "password": "passworddd",
     "database": "quiz_app",
     "host": "127.0.0.1",
     "dialect": "mysql"
@@ -14,10 +14,10 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
+    "username": "u9fxjzzojrt3sgfp",
+    "password": "EGAUiNB6qpUjVR3Is8uB",
+    "database": "bqtp5g03gebpxaozxgcz",
+    "host": "bqtp5g03gebpxaozxgcz-mysql.services.clever-cloud.com",
     "dialect": "mysql"
   }
 }
