@@ -166,31 +166,37 @@ const Creator = () => {
                 </div>
               </div>
             </div>
-            <div className="flex gap-4 justify-between 2xl:visible xl:visible lg:visible md:visible sm:invisible xs:invisible">
-              <Button
-                icon={
-                  <span className="material-symbols-rounded">analytics</span>
-                }
-                onClick={() => {}}
-                className="text-accent px-3 py-2"
-                innerText="View"
-              />
-              <Button
-                icon={<span className="material-symbols-rounded">publish</span>}
-                innerText="Publish"
-                handleClick={() => {
-                  console.log("clicked");
-                }}
-                className="h-11 px-3 py-2 text-white font-medium rounded-md hover:bg-teal-600 bg-accent"
-              />
-              <Button
-                icon={
-                  <span className="material-symbols-rounded">exit_to_app</span>
-                }
-                innerText="Sign Out"
-                handleClick={handleLogout}
-                className="h-11 px-3 py-2 hover:bg-red-500 bg-red-600 text-white font-medium rounded-md"
-              />
+            <div className="lg:block sm:hidden xs:hidden">
+              <div className="flex justify-between gap-4">
+                <Button
+                  icon={
+                    <span className="material-symbols-rounded">analytics</span>
+                  }
+                  onClick={() => {}}
+                  className="text-accent px-3 py-2"
+                  innerText="View"
+                />
+                <Button
+                  icon={
+                    <span className="material-symbols-rounded">publish</span>
+                  }
+                  innerText="Publish"
+                  handleClick={() => {
+                    console.log("clicked");
+                  }}
+                  className="h-11 px-3 py-2 text-white font-medium rounded-md hover:bg-teal-600 bg-accent"
+                />
+                <Button
+                  icon={
+                    <span className="material-symbols-rounded">
+                      exit_to_app
+                    </span>
+                  }
+                  innerText="Sign Out"
+                  handleClick={handleLogout}
+                  className="h-11 px-3 py-2 hover:bg-red-500 bg-red-600 text-white font-medium rounded-md"
+                />
+              </div>
             </div>
             <div className="flex flex-col items-end justify-center md:hidden">
               <button
