@@ -21,9 +21,11 @@ const Login = () => {
 
   const { mutate, isLoading, isError } = useMutation(postLoginFormData, {
     onSuccess: (successData) => {
-      if (successData !== undefined) {
+      if (successData !== undefined && successData.token !== undefined) {
         localStorage.setItem("authToken", successData.token);
         navigate("/dashboard");
+      } else {
+        setMessage(successData);
       }
     },
   });
@@ -53,6 +55,10 @@ const Login = () => {
         password: formData.password,
       });
     }
+    setFormData({
+      email: "",
+      password: "",
+    });
   };
 
   return (
